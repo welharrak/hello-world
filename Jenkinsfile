@@ -24,7 +24,7 @@ docker build -t hello-walid:test .
 
     stage('Run Image') {
       steps {
-        sh '''#/bib/sh # run the image created
+        sh '''#/bin/sh # run the image created
 docker run --rm -p 80:80 -d hello-walid:test'''
       }
     }
