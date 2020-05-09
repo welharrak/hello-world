@@ -7,21 +7,21 @@ pipeline {
       }
     }
 
-    stage('Stop all running containers') {
+    stage('Stop httpserver running containers') {
       steps {
-        sh 'docker stop $(docker ps -a -q)'
+        sh 'docker stop httpserver || echo "there is no httpserver running container"'
       }
     }
 
     stage('Build image') {
       steps {
-        sh 'docker build -t hello-walid:test .'
+        sh 'docker build -t hello-walid:latest .'
       }
     }
 
     stage('Run the image created') {
       steps {
-        sh 'docker run --rm -p 80:80 -d hello-walid:test'
+        sh 'docker run --rm --name httpserver -h httpserver -p 80:80 -d hello-walid:latest'
       }
     }
 
